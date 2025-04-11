@@ -3,6 +3,7 @@ package com.esprit.ms.apigatway4sae10;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
@@ -16,7 +17,9 @@ public class SecurityConfig {
         return serverHttpSecurity
                 .csrf(ServerHttpSecurity.CsrfSpec::disable)
                 .authorizeExchange(exchange ->
-                        exchange.pathMatchers("/refund/**").permitAll()
+                        exchange
+                                .pathMatchers(HttpMethod.OPTIONS).permitAll()
+                                .pathMatchers("/refund/**").authenticated()
                                 .anyExchange().authenticated()
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))
