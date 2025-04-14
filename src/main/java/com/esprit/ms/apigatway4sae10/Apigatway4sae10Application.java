@@ -28,9 +28,14 @@ public class Apigatway4sae10Application {
                ).build();*/
         return builder.routes()
                 .route("Apigatway4sae10",
-                        r -> r.path("/refund/**").uri("lb://refund-web-distibue")
-               
-                ).build();
+                        r -> r.path("/refund/**").uri("lb://refund-web-distibue"))
+
+                .route("feedback",
+                        r -> r.path("/feedback/**").uri("lb://feedback-web-distribue"))
+                .route("contra",
+                        r -> r.path("/api/contrats/**").uri("lb://contra"))
+
+                .build();
     }
 
 

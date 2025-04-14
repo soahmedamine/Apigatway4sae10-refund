@@ -19,7 +19,7 @@ public class SecurityConfig {
                 .authorizeExchange(exchange ->
                         exchange
                                 .pathMatchers(HttpMethod.OPTIONS).permitAll()
-                                .pathMatchers("/refund/**").authenticated()
+                                .pathMatchers("/refund/**", "/feedback/**","/contrat/**","/api/contrats/**").authenticated()
                                 .anyExchange().authenticated()
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))
